@@ -1,7 +1,22 @@
 #!/bin/bash
 
 decimal="$DECIMAL"
+hexadecimal=""
 
-hexadecimal=$(printf "%x" "$decimal")
+while [ "$decimal" -gt 0 ]; do
+  remainder=$((decimal % 16))
+  
+  case $remainder in
+    10) hexadecimal="A$hexadecimal";;
+    11) hexadecimal="B$hexadecimal";;
+    12) hexadecimal="C$hexadecimal";;
+    13) hexadecimal="D$hexadecimal";;
+    14) hexadecimal="E$hexadecimal";;
+    15) hexadecimal="F$hexadecimal";;
+    *) hexadecimal="$remainder$hexadecimal";;
+  esac
+  
+  decimal=$((decimal / 16))
+done
 
 echo "$hexadecimal"
